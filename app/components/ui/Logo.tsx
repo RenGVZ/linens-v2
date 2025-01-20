@@ -5,7 +5,7 @@ interface LogoProps {
 
 const Logo = ({ className = "", color = "white" }: LogoProps) => {
   return (
-    <svg className={className}>
+    <svg className={`w-full ${className}`}>
       <svg
         aria-label="Logo"
         className="x1ypdohk x13dflua x11xpdln xk4oym4 xus2keu"
