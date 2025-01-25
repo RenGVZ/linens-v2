@@ -29,7 +29,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950 flex`}
       >
         <Sidebar />
-        {children}
+        <div className="flex w-[80%] justify-center items-start h-screen py-4">
+          {children}
+        </div>
       </body>
     </html>
   )

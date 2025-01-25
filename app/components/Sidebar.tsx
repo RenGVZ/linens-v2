@@ -10,26 +10,21 @@ import { HeartIcon, UserIcon, EyeDropperIcon, Bars3BottomLeftIcon } from "@heroi
 const MiddleMenuItems = () => {
   return (
     <div className="flex flex-col items-center space-y-8">
-      <button className="text-sm text-gray-400 hover:text-gray-800">
+      <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
         <HomeIcon className="h-8 w-8" />
-        <Link href="/" />
-      </button>
-      <button className="text-sm text-gray-400 hover:text-gray-800">
+      </Link>
+      <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
         <MagnifyingGlassIcon className="h-8 w-8" />
-        <Link href="/" />
-      </button>
-      <button className="text-sm text-gray-400 hover:text-gray-800">
+      </Link>
+      <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
         <PlusIcon className="h-8 w-8" />
-        <Link href="/" />
-      </button>
-      <button className="text-sm text-gray-400 hover:text-gray-800">
+      </Link>
+      <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
         <HeartIcon className="h-8 w-8" />
-        <Link href="/" />
-      </button>
-      <button className="text-sm text-gray-400 hover:text-gray-800">
+      </Link>
+      <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
         <UserIcon className="h-8 w-8" />
-        <Link href="/" />
-      </button>
+      </Link>
     </div>
   )
 }
