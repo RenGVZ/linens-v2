@@ -13,6 +13,7 @@ type User = {
   display_name: string
   post_ids: string[]
   profile_pic: string
+  liked_posts: string[]
 }
 
 export type { Post, User }

@@ -4,8 +4,8 @@ import { createClient } from "@/utils/supabase/server"
 import type { Post as PostType, User } from "@/types/index"
 import { redirect } from "next/navigation"
 import Image from "next/image"
-import Link from "next/link"
 import Post from "@components/ui/Post"
+import CreatePostButton from "@components/ui/CreatePostButton"
 
 export default async function Home() {
   const supabase = await createClient()
@@ -14,7 +14,6 @@ export default async function Home() {
     .select()
     .order("created_at", { ascending: false })
     .returns<PostType[]>()
-  console.log(posts)
 
   const { data: user, error } = await supabase.auth.getUser()
   if (error || !user) {
@@ -25,7 +24,6 @@ export default async function Home() {
     .select()
     .eq("uuid", user.user?.id)
     .single<User>()
-  console.log("userProfile", userProfile)
 
   return (
     <div className="flex flex-col justify-center items-center space-y-4 w-full">
@@ -42,17 +40,11 @@ export default async function Home() {
             />
             <p className="text-zinc-500">What&apos;s new?</p>
           </div>
-          <div className="flex items-center">
-            <button className="h-[36px] bg-zinc-900 text-[15px] text-white flex items-center px-4 py-2 rounded-lg border-zinc-500 border font-semibold">
-              Post
-            </button>
-          </div>
+          {userProfile && <CreatePostButton user={userProfile} />}
         </div>
         <div className="flex flex-col">
           {posts?.map((post) => (
-            <Link href={`/post/${post.id}`} key={post.id}>
-              <Post {...post} />
-            </Link>
+            <Post key={post.id} {...post} />
           ))}
         </div>
       </ContentBoardLayout>

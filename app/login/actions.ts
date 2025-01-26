@@ -38,7 +38,7 @@ export async function signup(formData: FormData) {
   const { data, error } = await supabase.auth.signUp(userData)
   // I want to also create a user profile in the user table with this information
   // so I can use it in other parts of the app
-  await supabase.from("users").insert({ id: data.user?.id, email: data.user?.email })
+  await supabase.from("users").insert({ uuid: data.user?.id, email: data.user?.email })
 
   if (error) {
     redirect("/error")
