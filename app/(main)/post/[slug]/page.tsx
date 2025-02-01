@@ -1,6 +1,5 @@
 import { createClient } from "@/utils/supabase/server"
 import Post from "@components/ui/Post"
-import ContentBoard from "@/app/components/ui/ContentBoardLayout"
 
 export default async function PostPage({
   params,
@@ -19,9 +18,5 @@ export default async function PostPage({
     return <div>Post not found</div>
   }
 
-  return (
-    <ContentBoard>
-      <Post {...postData} />
-    </ContentBoard>
-  )
+  return <Post {...postData} />
 }
