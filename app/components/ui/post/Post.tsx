@@ -8,9 +8,9 @@ import {
 } from "@heroicons/react/24/outline"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import LikeButton from "./post/LikeButton"
+import LikeButton from "./LikeButton"
 import Link from "next/link"
-import ProfilePic from "./post/ProfilePic"
+import ProfilePic from "../../shared/ProfilePic"
 dayjs.extend(relativeTime)
 
 const Post = async (post: PostType) => {

@@ -11,19 +11,19 @@ const MiddleMenuItems = () => {
   return (
     <div className="flex flex-col items-center space-y-8">
       <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
-        <HomeIcon className="h-8 w-8" />
+        <HomeIcon height={32} width={32} />
       </Link>
       <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
-        <MagnifyingGlassIcon className="h-8 w-8" />
+        <MagnifyingGlassIcon height={32} width={32} />
       </Link>
       <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
-        <PlusIcon className="h-8 w-8" />
+        <PlusIcon height={32} width={32} />
       </Link>
       <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
-        <HeartIcon className="h-8 w-8" />
+        <HeartIcon height={32} width={32} />
       </Link>
       <Link href="/" className="text-sm text-gray-400 hover:text-gray-800">
-        <UserIcon className="h-8 w-8" />
+        <UserIcon height={32} width={32} />
       </Link>
     </div>
   )

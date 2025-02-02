@@ -75,9 +75,9 @@ const LikeButton = ({ likes, post_id, poster }: LikeButtonProps) => {
       disabled={isLoading}
     >
       {isLiked ? (
-        <FilledHeartIcon className="h-5 w-5" color="red" />
+        <FilledHeartIcon height={20} width={20} color="red" />
       ) : (
-        <HeartIcon className="h-5 w-5" color="white" />
+        <HeartIcon height={20} width={20} color="white" />
       )}
       <span>{likes > 0 ? likes : ""}</span>
     </button>

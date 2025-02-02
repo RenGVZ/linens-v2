@@ -8,12 +8,13 @@ type Post = {
 
 type User = {
   uuid: string
-  email: string
+  email?: string
   created_at: string
-  display_name: string
-  post_ids: string[]
-  profile_pic: string
-  liked_posts: string[]
+  display_name?: string
+  post_ids?: string[]
+  profile_pic?: string
+  liked_posts?: string[]
+  bio?: string
 }
 
 export type { Post, User }

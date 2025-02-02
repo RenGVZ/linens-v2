@@ -12,7 +12,7 @@ import {
   Bars3BottomLeftIcon,
   MapPinIcon,
 } from "@heroicons/react/24/outline"
-import Image from "next/image"
+import ProfilePic from "@/app/components/shared/ProfilePic"
 
 interface PostModalProps {
   user: User
@@ -24,7 +24,6 @@ const PostModal = ({ user, onClose }: PostModalProps) => {
   const [isLoading, setIsLoading] = useState(false)
   const [content, setContent] = useState("")
   const handlePost = async () => {
-    console.log("asdasd")
     setIsLoading(true)
     if (!content.trim()) {
       setIsLoading(false)
@@ -34,14 +33,13 @@ const PostModal = ({ user, onClose }: PostModalProps) => {
       const { error } = await supabase
         .from("posts")
         .insert({ user_id: user.uuid, content: content.trim() })
-      console.log(content)
       if (error) {
         throw error
       }
       onClose()
       window.location.reload()
     } catch (error) {
-      console.log("Error creating post:", error)
+      console.error("Error creating post:", error)
     } finally {
       setIsLoading(false)
     }
@@ -58,18 +56,17 @@ const PostModal = ({ user, onClose }: PostModalProps) => {
           </button>
           <h2 className="text-white text-lg font-semibold">New post</h2>
           <div className="flex items-center space-x-4">
-            <NewspaperIcon className="h-6 w-6 text-white" color="white" />
-            <EllipsisHorizontalCircleIcon className="h-6 w-6 text-white" />
+            <NewspaperIcon
+              height={24}
+              width={24}
+              className="text-white"
+              color="white"
+            />
+            <EllipsisHorizontalCircleIcon className="text-white" />
           </div>
         </div>
         <div className="flex flex-row w-full space-x-2 justify-start items-start py-4 px-5">
-          <Image
-            alt="post user picture"
-            src={user.profile_pic || "/default-avatar.png"}
-            width={36}
-            height={36}
-            className="rounded-full mt-1"
-          ></Image>
+          <ProfilePic userId={user?.uuid} profilePic={user?.profile_pic} />
           <div className="flex flex-col items-start w-full">
             <h2 className="text-white font-semibold">{user.display_name}</h2>
             <input
@@ -80,11 +77,31 @@ const PostModal = ({ user, onClose }: PostModalProps) => {
               className="relative text-white w-full bg-transparent border-none focus:ring-0 placeholder-zinc-500 focus-visible:outline-none"
             />
             <div className="flex w-full justify-start space-x-3 mt-2">
-              <PhotoIcon className="h-5 w-5 text-zinc-500 cursor-pointer" />
-              <GifIcon className="h-5 w-5 text-zinc-500 cursor-pointer" />
-              <HashtagIcon className="h-5 w-5 text-zinc-500 cursor-pointer" />
-              <Bars3BottomLeftIcon className="h-5 w-5 text-zinc-500 cursor-pointer" />
-              <MapPinIcon className="h-5 w-5 text-zinc-500 cursor-pointer" />
+              <PhotoIcon
+                height={20}
+                width={20}
+                className="text-zinc-500 cursor-pointer"
+              />
+              <GifIcon
+                height={20}
+                width={20}
+                className="text-zinc-500 cursor-pointer"
+              />
+              <HashtagIcon
+                height={20}
+                width={20}
+                className="text-zinc-500 cursor-pointer"
+              />
+              <Bars3BottomLeftIcon
+                height={20}
+                width={20}
+                className="text-zinc-500 cursor-pointer"
+              />
+              <MapPinIcon
+                height={20}
+                width={20}
+                className="text-zinc-500 cursor-pointer"
+              />
             </div>
             <button
               className="mt-4 bg-zinc-800 border-[0.5px] border-zinc-600 py-2 px-4 rounded-lg self-end disabled:opacity-50 disabled:cursor-default cursor-pointer"
