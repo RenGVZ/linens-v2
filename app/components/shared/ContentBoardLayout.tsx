@@ -4,7 +4,7 @@ interface ContentBoardProps {
 
 const ContentBoard = ({ children }: ContentBoardProps) => {
   return (
-    <div className="flex flex-col w-full h-screen bg-zinc-900 rounded-3xl">
+    <div className="flex flex-col w-full min-h-screen max-h-fit bg-zinc-900 rounded-3xl">
       {children}
     </div>
   )

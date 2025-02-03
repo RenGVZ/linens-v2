@@ -32,7 +32,7 @@ const Post = async (post: PostType) => {
 
   return (
     <div className="flex flex-row items-start px-6 py-3 space-x-2 border-b-[0.5px] border-zinc-700">
-      <div className="flex-shrink-0 w-9">
+      <div className="flex-shrink-0 w-9 mt-1">
         <ProfilePic userId={post.user_id} profilePic={poster?.profile_pic} />
       </div>
       <div className="flex flex-col items-start space-y-2 min-w-0 flex-1">

@@ -1,9 +1,8 @@
 import { createClient } from "@/utils/supabase/server"
 import type { Post as PostType, User } from "@/types/index"
 import { redirect } from "next/navigation"
-import ProfilePic from "@/app/components/shared/ProfilePic"
-import { Post } from "@/app/components/ui/post"
-import CreatePostButton from "@components/ui/home/CreatePostButton"
+import { Post } from "@components/ui/post"
+import CreatePostZone from "@components/shared/CreatePostZone"
 
 export default async function Home() {
   const supabase = await createClient()
@@ -27,16 +26,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex justify-between border-b-[0.5px] border-zinc-700 px-6">
-        <div className="flex items-center space-x-2 py-5">
-          <ProfilePic
-            userId={userProfile.uuid}
-            profilePic={userProfile?.profile_pic}
-          />
-          <p className="text-zinc-500">What&apos;s new?</p>
-        </div>
-        <CreatePostButton user={userProfile} />
-      </div>
+      <CreatePostZone userProfile={userProfile} />
       <div className="flex flex-col">
         {posts?.map((post) => (
           <Post key={post.id} {...post} />

@@ -12,7 +12,7 @@ import {
   Bars3BottomLeftIcon,
   MapPinIcon,
 } from "@heroicons/react/24/outline"
-import ProfilePic from "@/app/components/shared/ProfilePic"
+import ProfilePic from "@components/shared/ProfilePic"
 
 interface PostModalProps {
   user: User

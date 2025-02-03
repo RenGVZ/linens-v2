@@ -41,7 +41,7 @@ const ProfilePic = ({
         src={imgSrc}
         width={getSize(size)}
         height={getSize(size)}
-        className="rounded-full mt-1"
+        className="rounded-full"
         onError={() => {
           setImgSrc(AnonProfile.src)
         }}
