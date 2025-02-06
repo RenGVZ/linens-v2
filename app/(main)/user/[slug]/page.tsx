@@ -1,11 +1,14 @@
 import { createClient } from "@/utils/supabase/server"
 import ProfilePic from "@components/shared/ProfilePic"
 import CreatePostZone from "@components/shared/CreatePostZone"
+import { TabsList } from "@components/ui/user/tabs"
 import { ChartBarSquareIcon, CameraIcon } from "@heroicons/react/24/outline"
+import { Post } from "@components/ui/post/index"
+import type { Post as PostType } from "@/types/index"
 
 const UserPage = async ({ params }: { params: { slug: string } }) => {
   const supabase = await createClient()
-  const { slug } = params
+  const { slug } = await params
 
   const { data: userData } = await supabase
     .from("users")
@@ -13,7 +16,34 @@ const UserPage = async ({ params }: { params: { slug: string } }) => {
     .eq("uuid", slug)
     .single()
 
-  console.log("data:", userData)
+  const { data: userPosts } = await supabase
+    .from("posts")
+    .select()
+    .in("id", userData?.post_ids)
+
+  const { data: likedPosts } = await supabase
+    .from("posts")
+    .select()
+    .in("id", userData?.liked_posts)
+
+  const userPostsContent = () => {
+    if (userPosts) {
+      return userPosts.map((post: PostType) => <Post key={post.id} {...post} />)
+    } else {
+      return <CreatePostZone userProfile={userData} />
+    }
+  }
+
+  const userLikedPostsContent = () => {
+    if (likedPosts) {
+      return likedPosts.map((post: PostType) => (
+        <Post key={post.id} {...post} />
+      ))
+    } else {
+      return <div className="h-full w-full text-center">No liked posts</div>
+    }
+  }
+
   return (
     <div className="w-full flex flex-col">
       <div className="flex flex-col w-full px-6 py-10">
@@ -46,7 +76,10 @@ const UserPage = async ({ params }: { params: { slug: string } }) => {
           </button>
         </div>
       </div>
-      <CreatePostZone userProfile={userData} />
+      <TabsList tabs={["Posts", "Liked Posts"]}>
+        <>{userPostsContent()}</>
+        <>{userLikedPostsContent()}</>
+      </TabsList>
     </div>
   )
 }
