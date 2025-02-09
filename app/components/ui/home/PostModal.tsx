@@ -2,7 +2,6 @@
 
 import type { User } from "@/types/index"
 import { useState } from "react"
-import { createClient } from "@/utils/supabase/client"
 import {
   NewspaperIcon,
   EllipsisHorizontalCircleIcon,
@@ -20,7 +19,6 @@ interface PostModalProps {
 }
 
 const PostModal = ({ user, onClose }: PostModalProps) => {
-  const supabase = createClient()
   const [isLoading, setIsLoading] = useState(false)
   const [content, setContent] = useState("")
   const handlePost = async () => {
@@ -30,12 +28,18 @@ const PostModal = ({ user, onClose }: PostModalProps) => {
       return
     }
     try {
-      const { error } = await supabase
-        .from("posts")
-        .insert({ user_id: user.uuid, content: content.trim() })
-      if (error) {
-        throw error
-      }
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: content.trim(), user_id: user.uuid }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) throw new Error(data.error)
+
       onClose()
       window.location.reload()
     } catch (error) {
