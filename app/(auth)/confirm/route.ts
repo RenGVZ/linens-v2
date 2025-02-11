@@ -19,13 +19,11 @@ export async function GET(request: NextRequest) {
     console.log("error", error);
 
     if (!error) {
-      // Get the user data after verification
       const {
         data: { user },
       } = await supabase.auth.getUser()
 
       if (user) {
-        // Create user profile in users table
         const { error: profileError } = await supabase.from("users").insert([
           {
             uuid: user.id,

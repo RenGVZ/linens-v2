@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server"
 import { NextResponse } from "next/server"
+import { revalidatePath } from "next/cache"
 
 export async function POST(request: Request) {
   const supabase = await createClient()
@@ -24,6 +25,9 @@ export async function POST(request: Request) {
       .single()
 
     if (error) throw error
+
+    revalidatePath("/")
+    revalidatePath(`/user/${body.user_id}`)
 
     return NextResponse.json({ data: post }, { status: 201 })
   } catch (error) {
