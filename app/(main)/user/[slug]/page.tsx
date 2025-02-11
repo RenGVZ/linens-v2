@@ -20,11 +20,13 @@ const UserPage = async ({ params }: { params: { slug: string } }) => {
     .from("posts")
     .select()
     .in("id", userData?.post_ids)
+    .order("created_at", { ascending: false })
 
   const { data: likedPosts } = await supabase
     .from("posts")
     .select()
     .in("id", userData?.liked_posts)
+    .order("created_at", { ascending: false })
 
   const userPostsContent = () => {
     if (userPosts) {

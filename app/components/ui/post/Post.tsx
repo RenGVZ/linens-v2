@@ -21,17 +21,12 @@ const Post = async (post: PostType) => {
     .eq("uuid", post.user_id)
     .single<User>()
 
-  const { data: comments } = await supabase
-    .from("comments")
-    .select()
-    .eq("post_id", post.id)
-
   if (!poster) {
     return <div>Owner of post not found</div>
   }
 
   return (
-    <div className="flex flex-row items-start px-6 py-3 space-x-2 border-b-[0.5px] border-zinc-700">
+    <div className="flex flex-row items-start px-6 py-3 space-x-2 border-b-[0.5px] border-zinc-700 last:border-b-0">
       <div className="flex-shrink-0 w-9 mt-1">
         <ProfilePic userId={post.user_id} profilePic={poster?.profile_pic} />
       </div>
@@ -54,7 +49,11 @@ const Post = async (post: PostType) => {
           <LikeButton likes={post.likes} post_id={post.id} poster={poster} />
           <button className="flex items-center text-white text-xs space-x-1">
             <ChatBubbleOvalLeftIcon className="h-5 w-5" color="white" />
-            <span>{comments?.length || ""}</span>
+            <span>
+              {post.comment_ids && post.comment_ids.length > 0
+                ? post.comment_ids.length
+                : ""}
+            </span>
           </button>
           <button className="flex items-center text-white text-xs space-x-1">
             <ArrowsRightLeftIcon className="h-5 w-5" color="white" />

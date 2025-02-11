@@ -4,6 +4,7 @@ type Post = {
   created_at: string
   likes: number
   user_id: string
+  comment_ids: null | string[]
 }
 
 type User = {

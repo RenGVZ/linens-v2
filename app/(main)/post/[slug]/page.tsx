@@ -14,9 +14,24 @@ export default async function PostPage({
     .eq("id", slug)
     .single()
 
+  const { data: commentData } = await supabase
+    .from("comments")
+    .select()
+    .in("id", postData?.comment_ids || [])
+    .order("created_at", { ascending: false })
+
   if (!postData) {
     return <div>Post not found</div>
   }
 
-  return <Post {...postData} />
+  return (
+    <>
+      <Post {...postData} />
+      {commentData &&
+        commentData.length > 0 &&
+        commentData.map((comment) => {
+          return <Post key={comment.id} {...comment} />
+        })}
+    </>
+  )
 }
